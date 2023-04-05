@@ -2,24 +2,22 @@
 
 import serial, re
 
-# settings #################################################
+# settings
 COM='/dev/ttyS0'
 DEBUG = False
 EMPTIES=5    # number of white space bytes between blocks
 FACTOR=1000  # factor between unit of scale and ticket
 LABEL_ZPL="""^XA
-
 ^FX Top section with logo, name and address.
-^CF0,40
-^FO60,40^FDco-labor en vrac^FS
+^CF0,45
+^FO40,40^FDco-labor en vrac^FS
+^CF0,20
+^FO290,77^FD0,143 kg^FS
 
 ^FX section with bar code.
-^BY3,3,90
-^FO40,100^BC^FD0110.5g^FS
-
-^XZ"""       # label model in ZPL format. online editor/viewer at http://labelary.com/viewer.html
-
-# settings #################################################
+^BY2,3,90
+^FO37,110^BC^FD070000001439^FS
+^XZ"""       # label model in ZPL format. {kgs} and {grams5} get replaced. online editor/viewer at http://labelary.com/viewer.html
 
 
 # buffer whole block
@@ -41,5 +39,5 @@ data = read_block()
 print(data)
 
 weight = re.search(f"\s{{{EMPTIES}}}(\S+)\skg\s", data)
-
 print(weight.group(1))
+
