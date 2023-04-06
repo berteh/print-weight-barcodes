@@ -6,5 +6,5 @@
 
 ^FX section with bar code.
 ^BY4,3,130
-^FO55,130^BC,,N,,,D^FD0700000014239^FS
+^FO55,130^BE,,N^FD070000001423^FS
 ^XZ

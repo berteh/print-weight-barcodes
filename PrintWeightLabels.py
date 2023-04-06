@@ -10,22 +10,22 @@ PRINTER_NAME='zebra-raw'  # CUPS name of zebra printer
 DEBUG = False
 EMPTIES = 5    # number of white space bytes between blocks
 FACTOR = 1000  # scale factor from unit of scale to unit of label barcode
-APPEND_CHECKSUM = True
 """ label model in ZPL format. $kgs, $grams, $checksum and $cheers will be replaced.
 online editor/viewer at http://labelary.com/viewer.html"""
 TEMPLATE_ZPL = """^XA
 ^FX section with header and readable weight
 ^CF0,70
-^FO75,50^FDco-labor en vrac^FS
+^FO75,60^FDco-labor en vrac^FS
 ^CF0,35
-^FO78,115^FD$cheers^FS
-^FO570,115,1^FDTare: $kgs kg^FS
+^FO78,125^FD$cheers^FS
+^FO570,125,1^FDTare: $kgs kg^FS
 
 ^FX section with bar code.
-^BY4,3,130
-^FO55,170^BC,,N,,,D^FD0700000$grams$checksum^FS
+^BY5,3,140
+^FO85,170^BE,,Y^FD0700000$grams^FS
 ^XZ"""       
-CHEERS = ["Bravo !", "Merci.", "Parfait !", "Merci.", "Merci.", "Génial !", "Extra !"]  # list of short cheers. One may be added at random on the label
+CHEERS = ["Bravo !", "Merci.", "Parfait !", "Génial !", "Extra !", "Merci.", "Merci."]  # list of short cheers. One may be added at random on the label
+#test DE chars : CHEERS = ["Génial, Glück & ß"]
 
 # buffer whole block from scale
 def read_block(p = COM_SCALE, empties = EMPTIES):
@@ -52,21 +52,11 @@ def get_weight_from_scale() :
 	return(weight.group(1))
 
 
-def calc_check_digit(number):
-    """Calculate the EAN check digit for 12-digit numbers.
-    from https://github.com/arthurdejong/python-stdnum/blob/master/stdnum/ean.py"""
-    return str((10 - sum((3, 1)[i % 2] * int(n)
-                         for i, n in enumerate(reversed(number)))) % 10)
-
-
 def get_zpl(kgs = "1,341") :
 	if DEBUG : print("generating ZPL")
 	grams = kgs.replace(",","").zfill(5);
-	if APPEND_CHECKSUM :
-		checksum = calc_check_digit(f"0700000{grams}")
-	else : checksum = ""
 	t = Template(TEMPLATE_ZPL)
-	zpl = t.safe_substitute(kgs=kgs, grams=grams, checksum=checksum, cheers=random.choice(CHEERS))
+	zpl = t.safe_substitute(kgs=kgs, grams=grams, cheers=random.choice(CHEERS))
 	return(zpl)
 
 
@@ -76,7 +66,7 @@ def send_to_printer(zpl = TEMPLATE_ZPL, p = PRINTER_NAME) :
 
 	try:
 		conn = cups.Connection()		
-		b = zpl.encode(encoding = 'utf-8')
+		b = zpl.encode(encoding = 'utf-16')
 		f.write(b)
 		f.seek(0)   # rewind needed to allow cups to read file
 		conn.printFile(p, f.name, 'Weigh label', {} )
