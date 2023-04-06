@@ -117,6 +117,7 @@ def test() :
 
 def weight_and_print() :
 	kgs = get_weight_from_scale()
+	#kgs = ("0,678")
 	zpl = get_zpl(kgs)
 	send_to_printer(zpl)
 
