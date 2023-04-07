@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+"""
+author : berteh, for co-labor
+licence : CC-BY-SA
+homepage, contributions : https://github.com/berteh/print-weight-barcodes
+"""
+
 import serial, re, random, cups
 from string import Template
 from tempfile import NamedTemporaryFile
