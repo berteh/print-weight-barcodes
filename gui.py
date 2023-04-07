@@ -2,9 +2,9 @@
 
 """
 credit: 
+- software : berteh, for co-labor, CC-BY-SA, https://github.com/berteh/print-weight-barcodes
 - vegetables photo by <a href="https://unsplash.com/es/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nathan Dumlao</a> on <a href="https://unsplash.com/photos/bRdRUUtbxO0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - nuts photo by <a href="https://unsplash.com/@marcospradobr?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marcos Paulo Prado</a> on <a href="https://unsplash.com/photos/GQTfzrGWzWU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
 """
 
 import os, tkinter as tk
@@ -13,7 +13,7 @@ import PrintWeightLabels as pwl
 from PIL import ImageTk, Image, ImageChops
 from functools import partial
 
-FULLSCREEN = True
+FULLSCREEN = False
 DEBUG = False
 BGCOLOR = "#010101"
 HCOLOR = "#85a01f"
@@ -102,10 +102,6 @@ class App:
                 
         
         #decor
-        self.bottomI = ImageTk.PhotoImage(Image.open(PICSDIR+LOGO)) # ImageTk needs link from self to prevent early garbage collection
-        bottomP = tk.Label(root, image = self.bottomI, bg=BGCOLOR)
-        bottomP.place(anchor="s", relx=0.60, rely=0.98)
-        
         self.leftI = ImageTk.PhotoImage(Image.open(PICSDIR+LEFT))
         leftP = tk.Label(root, image = self.leftI, bg=BGCOLOR)
         leftP.place(anchor="e", relx=0.25, rely=0.5, relheight=1.0)
@@ -113,7 +109,11 @@ class App:
         self.rightI = ImageTk.PhotoImage(Image.open(PICSDIR+RIGHT))
         rightP = tk.Label(root, image = self.rightI, bg=BGCOLOR)
         rightP.place(anchor="w", relx=0.75, rely=0.5, relheight=1.0)
-
+  
+        self.bottomI = ImageTk.PhotoImage(Image.open(PICSDIR+LOGO)) # ImageTk needs link from self to prevent early garbage collection
+        bottomP = tk.Label(root, image = self.bottomI, bg=BGCOLOR)
+        bottomP.place(anchor="s", relx=0.60, rely=0.98)
+      
         
         #instructions
         ftL = tkFont.Font(family='Noto sans, sans-serif', size=17)
@@ -121,7 +121,7 @@ class App:
 
         msgM=tk.Message(root, textvariable=_msg, font=ftS, justify=tk.LEFT,
             fg="lightgrey", bg=BGCOLOR, aspect=400)
-        msgM.place(anchor="n", relx=0.5, rely=0.05, width=width*0.40)
+        msgM.place(anchor="n", relx=0.5, rely=0.05, width=width*0.5)
         
 
         #flags
@@ -207,9 +207,9 @@ if __name__ == "__main__":
     #i18n
     root = tk.Tk()
 
-    _btn = tk.StringVar("")
-    _msg = tk.StringVar("")
-    _statut = tk.StringVar("")
+    _btn = tk.StringVar()
+    _msg = tk.StringVar()
+    _statut = tk.StringVar()
     
     app = App(root)
     set_lang('FR')
