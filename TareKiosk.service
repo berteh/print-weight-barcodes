@@ -1,0 +1,11 @@
+[Unit]
+Description=Tare Scale Kiosk
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/bertrand/devel/print-weight-barcodes/gui.py
+
+[Install]
+WantedBy=multi-user.target

@@ -13,14 +13,14 @@ import PrintWeightLabels as pwl
 from PIL import ImageTk, Image, ImageChops
 from functools import partial
 
-FULLSCREEN = False
+FULLSCREEN = True
 DEBUG = False
 BGCOLOR = "#010101"
 HCOLOR = "#85a01f"
 LOGO = 'logo.png'
 LEFT = 'left2.jpg'
 RIGHT = 'right2.jpg'
-PRINT = 'Zebra.png'
+PRINT = 'Zebra.png'  #'ZD410_tsp.png'
 PICSDIR = os.path.realpath(os.path.dirname(__file__))+"/pics/"
 
 
