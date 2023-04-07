@@ -55,7 +55,7 @@ sein Gewicht wird an der Kasse anhand des Strichcodes auf dem Etikett abgezogen"
     },
     'LU' : {
         'print': "Dréckt Är\nEtikett aus",
-        'instructions': """1. Setzt Ären eidele Container mat sengem Deckel op der Skala
+        'instructions': """1. Setzt Ären eidele Behälter mat sengem Deckel op der Skala
 2. Dréckt eng Etikett dat säin eidelt Gewiicht enthält
 3. Pescht dëse Label un de Behälter op enger zougänglecher Plaz
 4. Fëllt Äre Behälter mat 1 Typ vu Produkt, säi Gewiicht gëtt
