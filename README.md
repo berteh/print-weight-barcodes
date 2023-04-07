@@ -12,13 +12,26 @@ or do it manually for a finer understanding :
 - cp TareKiosk.service $HOME/.config/systemd/user/TareKiosk.service
 - systemctl --user daemon-reload
 - systemctl --user enable TareKiosk.service
-- systemctl --user start TareKiosk.service
+
+and install applications shortcuts on desktop:
+
+    cp ubuntu/S*.desktop $HOME/Desktop
 
 
-see service status at
+and service startup at session login:
+
+    cp ubuntu/'Tare Kiosk.desktop' $HOME/.config/autostart/
+
+
+
+
+You can then see service status at
 
     systemctl --user status TareKiosk.service 
 
-stop service at
+start/stop service at
 
     systemctl --user stop TareKiosk.service
+    systemctl --user start TareKiosk.service
+
+

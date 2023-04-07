@@ -13,7 +13,7 @@ import PrintWeightLabels as pwl
 from PIL import ImageTk, Image, ImageChops
 from functools import partial
 
-FULLSCREEN = False
+FULLSCREEN = True
 DEBUG = False
 BGCOLOR = "#010101"
 HCOLOR = "#85a01f"

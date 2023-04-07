@@ -9,4 +9,5 @@ systemctl --user daemon-reload
 systemctl --user enable TareKiosk.service
 #systemctl --user start TareKiosk.service
 
-cp ubuntu/*.desktop $HOME/Desktop
+cp ubuntu/S*.desktop $HOME/Desktop
+cp ubuntu/'Tare Kiosk.desktop' $HOME/.config/autostart/
