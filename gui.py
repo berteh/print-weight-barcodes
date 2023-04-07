@@ -16,6 +16,7 @@ from functools import partial
 FULLSCREEN = True
 DEBUG = False
 BGCOLOR = "#010101"
+BGCOLOR2 = "#222222"
 HCOLOR = "#85a01f"
 LOGO = 'logo.png'
 LEFT = 'left2.jpg'
@@ -134,7 +135,7 @@ class App:
         self.luI = ImageTk.PhotoImage(luR)
         luB = tk.Button(root, text='LU', font = ftS, justify="center",
             image=self.luI,
-            bg=BGCOLOR, activebackground=BGCOLOR,
+            bg=BGCOLOR2, activebackground=BGCOLOR2,
             fg=HCOLOR, activeforeground=HCOLOR,
             borderwidth=0, relief=tk.FLAT, pady=3)
         luB["command"] = partial(set_lang, 'LU')
@@ -145,7 +146,7 @@ class App:
         self.frI = ImageTk.PhotoImage(frR)
         frB = tk.Button(root, text='FR', font = ftS, justify="center",
             image=self.frI,
-            bg=BGCOLOR, activebackground=BGCOLOR,
+            bg=BGCOLOR2, activebackground=BGCOLOR2,
             fg=HCOLOR, activeforeground=HCOLOR,
             borderwidth=0, relief=tk.FLAT, pady=3)
         frB["command"] = partial(set_lang, 'FR')
@@ -156,7 +157,7 @@ class App:
         self.deI = ImageTk.PhotoImage(deR)
         deB = tk.Button(root, text='DE', font = ftS, justify="center",
             image=self.deI,
-            bg=BGCOLOR, activebackground=BGCOLOR,
+            bg=BGCOLOR2, activebackground=BGCOLOR2,
             fg=HCOLOR, activeforeground=HCOLOR,
             borderwidth=0, relief=tk.FLAT, pady=3)
         deB["command"] = partial(set_lang, 'DE')
@@ -167,7 +168,7 @@ class App:
         self.ptI = ImageTk.PhotoImage(ptR)
         ptB = tk.Button(root, text='PT', font = ftS, justify="center",
             image=self.ptI,
-            bg=BGCOLOR, activebackground=BGCOLOR,
+            bg=BGCOLOR2, activebackground=BGCOLOR2,
             fg=HCOLOR, activeforeground=HCOLOR,
             borderwidth=0, relief=tk.FLAT, pady=3)
         ptB["command"] = partial(set_lang, 'PT')
@@ -178,7 +179,7 @@ class App:
         self.enI = ImageTk.PhotoImage(enR)
         enB = tk.Button(root, text='EN', font = ftS, justify="center",
             image=self.enI,
-            bg=BGCOLOR, activebackground=BGCOLOR,
+            bg=BGCOLOR2, activebackground=BGCOLOR2,
             fg=HCOLOR, activeforeground=HCOLOR,
             borderwidth=0, relief=tk.FLAT, pady=3)
         enB["command"] = partial(set_lang, 'EN')
