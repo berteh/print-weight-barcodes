@@ -149,6 +149,12 @@ Pour vérifier l'état du service :
     systemctl --user status TareKiosk.service 
 
 
+## Full screen ou pas
 
+basculez en full-screen (impossible d'en sortir sans clavier) en modifiant la variable du script:
 
+    mousepad ~/print-weight-barcodes/gui.py
 
+    FULLSCREEN = True
+
+et redémarrez le kiosk (simple alt+f4)
