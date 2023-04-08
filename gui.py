@@ -104,7 +104,8 @@ class App:
         root.geometry('%dx%d+%d+%d' % (width, height, 0 ,0))
         root.resizable(width=True, height=True)
         if FULLSCREEN : root.attributes('-fullscreen',True)  #not resizeable fullscreen, option for kiosk
-                
+        #root.attributes('-transparentcolor',"#abcdef") # does not work on root ? would have be nice for flags background
+
         
         #decor
         self.leftI = ImageTk.PhotoImage(Image.open(PICSDIR+LEFT))

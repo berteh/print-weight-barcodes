@@ -43,7 +43,7 @@ OU le copier depuis clé usb :
 puis installer les librairies requises
 
     python3-tk python3-pil python3-pil.imagetk
-    pip install pyserial pycups
+    pip install pyserial pycups pyttk
 
  
 ## eventuellement éditeur de code correct
