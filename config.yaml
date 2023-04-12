@@ -1,0 +1,82 @@
+%YAML 1.2
+# author : berteh, for co-labor
+# licence : CC-BY-SA
+# homepage : https://github.com/berteh/print-weight-barcodes
+
+# PrintWeightLabels : settings
+---
+
+station1 : &gui-left                # copy and adapt to create as many specific configurations as you'd like
+  scale port : '/dev/ttyS0'         # COM device name of RS-232 scale
+  printer name : 'zebra-raw-D3'     # CUPS name of zebra (RAW or TEXT Queue) printer
+  label template : '5x2.5 TLP2824'  # MUST be one the label templates defined below and compatible with the printer above
+  empty print queue on launch : yes # set to *no* if other users connect to same printer, otherwise it's recommanded to set to yes to remove legacy print jobs from queue on launch
+  picture : 'Zebra.png'
+
+station2 : 
+  scale port : '/dev/ttyS0'
+  printer name : 'zebra-raw-B1'
+  label template : '5.7x3.1 ZD410'
+  empty print queue on launch : yes
+  picture : 'Zebra.png'
+
+station3 : &gui-right
+  scale port : '/dev/ttyS1'
+  printer name : 'zebra-raw-D2'
+  label template : '5x2.5 TLP2824'
+  empty print queue on launch : yes
+  picture : 'Zebra.png'
+
+
+gui stations:  # GUI supports 1 or 2 active stations, comment second line if you need just one, move anchors (&word) to appropriate station definition
+- *gui-left
+- *gui-right
+
+
+# There is usually no need to make changes below this line.
+debug : False
+templates :     # label templates in ZPL format. $kgs, $grams and $cheers will be replaced. $grams will be 5 chars long (KKGGG). online editor/viewer at http://labelary.com/viewer.html
+  '5.7x3.1 ZD410' : 
+    resolution : 300
+    zpl : |
+      ^XA
+      ^FX section with header and readable weight
+      ^CF0,70
+      ^FO570,60,1^FDco-labor en vrac^FS
+      ^CF0,35
+      ^FO78,125^FD$cheers^FS
+      ^FO570,125,1^FDTare $kgs kg^FS
+      ^FX section with bar code.
+      ^BY5,3,140
+      ^FO85,170^BE,,N^FD0700000$grams^FS
+      ^XZ
+  '5x2.5 TLP2824' :
+    resolution : 203
+    zpl : |
+      ^XA
+      ^FX section with header and readable weight
+      ^CF0,40
+      ^FO335,20,1^FDco-labor en vrac^FS
+      ^CF0,20
+      ^FO50,55^FD$cheers^FS
+      ^FO335,55,1^FDTare $kgs kg^FS
+      ^FX section with bar code.
+      ^BY3,3,80
+      ^FO50,80^BE,,N^FD0700000$grams^FS
+      ^XZ
+cheers :      # list of *short* cheers. One may be added at random on the label
+- "Bravo !"
+- "Merci."
+- "Parfait !"
+- "Génial !"
+- "Extra !"
+- "Merci."
+- "Merci."
+
+default CLI station : 'station3'
+
+
+# modify below only for other scales as Soehnle 37xx
+
+scale empties : 5   # number of white space bytes between Serial (COM or USB) blocks
+scale bytes : 44    # number of bytes to grab from scale. multiple of 22 work with Soehnle 37xx. adapt for other scale types

@@ -9,19 +9,19 @@ credit:
 
 import os, tkinter as tk
 import tkinter.font as tkFont
-import PrintWeightLabels as pwl
+from  PrintWeightLabels import *
 from PIL import ImageTk, Image, ImageChops
 from functools import partial
 
 FULLSCREEN = True
-DEBUG = False
+DEBUG = True
 BGCOLOR = "#010101"
 BGCOLOR2 = "#222222"
 HCOLOR = "#85a01f"
 LOGO = 'logo.png'
 LEFT = 'left2.jpg'
 RIGHT = 'right2.jpg'
-PRINT = 'Zebra.png'  #'ZD410_tsp.png'
+PRINT = 'Zebra.png'  #'ZD410_tsp.png' # now configured in config.yaml
 PICSDIR = os.path.realpath(os.path.dirname(__file__))+"/pics/"
 
 
@@ -127,7 +127,7 @@ class App:
 
         msgM=tk.Message(root, textvariable=_msg, font=ftS, justify=tk.LEFT,
             fg="lightgrey", bg=BGCOLOR, aspect=400)
-        msgM.place(anchor="n", relx=0.5, rely=0.05, width=width*0.5)
+        msgM.place(anchor="n", relx=0.5, rely=0.075, width=width*0.5)
         
 
         #flags
@@ -206,24 +206,48 @@ class App:
         enB.place(anchor="s", relx=0.40, rely=0.95, width=width*0.04)
 
 
-        #print button        
-        printO = Image.open(PICSDIR+PRINT)
-        printO = resize_image(printO, [width*0.3*0.7, height*0.4*0.7])
-        self.printI = ImageTk.PhotoImage(printO)        
-        printB=tk.Button(root, textvariable=_btn, font = ftL, justify="center",
-            image=self.printI, compound=tk.BOTTOM,
+        #print button(s)
+        conf = get_config_GUI_details()
+        
+        delta_relx = 0.0  
+        if len(conf) == 2 :
+            delta_relx = 0.2
+
+            #second print button (right)
+            printOR = Image.open(PICSDIR+PRINT)
+            printOR = resize_image(printOR, [width*0.3*0.7, height*0.4*0.7])
+            self.printIR = ImageTk.PhotoImage(printOR)        
+            printBR=tk.Button(root, textvariable=_btn, font = ftL, justify="center",
+                image=self.printIR, compound=tk.BOTTOM,
+                bg=BGCOLOR, activebackground=BGCOLOR,
+                fg=HCOLOR, activeforeground=HCOLOR,
+                borderwidth=7, relief=tk.RAISED, pady=10)
+            printBR.place(anchor="center", relx=0.5+delta_relx, rely=0.52, width=width*0.3)
+            self.pwlR = PrintWeightLabels('station1')
+            printBR["command"] = self.printB_right
+        
+        #first print button (left)   
+        printOL = Image.open(PICSDIR+PRINT)
+        printOL = resize_image(printOL, [width*0.3*0.7, height*0.4*0.7])
+        self.printIL = ImageTk.PhotoImage(printOL)        
+        printBL=tk.Button(root, textvariable=_btn, font = ftL, justify="center",
+            image=self.printIL, compound=tk.BOTTOM,
             bg=BGCOLOR, activebackground=BGCOLOR,
             fg=HCOLOR, activeforeground=HCOLOR,
             borderwidth=7, relief=tk.RAISED, pady=10)
-        printB.place(anchor="center", relx=0.5, rely=0.55, width=width*0.3)
-        printB["command"] = self.printB_command
+        printBL.place(anchor="center", relx=0.5-delta_relx, rely=0.52, width=width*0.3)
+        self.pwlL = PrintWeightLabels('station3')
+        printBL["command"] = self.printB_left
 
 
 
-    def printB_command(self):
-        print("printing")
-        pwl.weight_and_print()
+    def printB_right(self):
+        if DEBUG : print("printing right")
+        self.pwlR.weight_and_print()
 
+    def printB_left(self):
+        if DEBUG : print("printing left")
+        self.pwlL.weight_and_print()
 
 
 

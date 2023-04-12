@@ -9,7 +9,7 @@ installation station de tare.
 ## applications complémentaires
 
     sudo apt-get install mousepad openssh-server system-config-printer cups gnome-system-tools
-    sudo apt-get install cutecom git python3-pip
+    sudo apt-get install cutecom minicom git python3-pip
 
 
 ## installation automatique des mises à jour de sécurité
@@ -72,6 +72,9 @@ Eventuellement tester la bonne connection avec la balance, avec port : */dev/tty
 
 (à exécuter avec `sudo` pour droits d'accès si avant redémarrage)
 
+ou tester la communication balance via ligne de commande :  (pour quitter minicom: `ctrl+a  x`)
+
+    minicom -b 9600 -D /dev/ttyS0 -c on -w
 
 # désactiver screensaver et powersave
 `settings > Power Manager`
