@@ -24,14 +24,14 @@ GUI is ready for dual (above) or single (below) setup:
 2. edit `config.yaml` to suit your devices
 2. install dependencies:
 
-    sudo apt-get install cutecom cups python3-pip python3-tk python3-pil python3-pil.imagetk
-    pip install pyserial pycups pyttk pyyaml pytest
+        sudo apt-get install cutecom cups python3-pip python3-tk python3-pil python3-pil.imagetk
+        pip install pyserial pycups pyttk pyyaml pytest
 
 3. quick check configuration for most probable errors (configuration, access rights): `pytest`
 4. run `cd ~/print-weight-barcodes && python3 gui.py`
 5. copy launcher to desktop and *update it's working directory* (right clic > edit launcher) to match your script location
 
-    cp ubuntu/'Tare Kiosk.desktop' $HOME/Desktop/
+        cp ubuntu/'Tare Kiosk.desktop' $HOME/Desktop/
 
 Current user needs to have rights to read scale weight. add him to `dialout` and `tty` groups.
 
