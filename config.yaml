@@ -11,22 +11,21 @@ station1 : &gui-left                # copy and adapt to create as many specific 
   printer name : 'zebra-raw-D3'     # CUPS name of zebra (RAW or TEXT Queue) printer
   label template : '5x2.5 TLP2824'  # MUST be one the label templates defined below and compatible with the printer above
   empty print queue on launch : yes # set to *no* if other users connect to same printer, otherwise it's recommanded to set to yes to remove legacy print jobs from queue on launch
-  picture : 'Zebra.png'
+  picture : 'Tiger_art_left.png'    # image for big print button (png or jpg, 400 px wide, in ./pics/ directory)
 
 station2 : 
   scale port : '/dev/ttyS0'
   printer name : 'zebra-raw-B1'
   label template : '5.7x3.1 ZD410'
   empty print queue on launch : yes
-  picture : 'Zebra.png'
+  picture : 'Zebra_art_right.png'
 
 station3 : &gui-right
   scale port : '/dev/ttyS1'
   printer name : 'zebra-raw-D2'
   label template : '5x2.5 TLP2824'
   empty print queue on launch : yes
-  picture : 'Zebra.png'
-
+  picture : 'Zebra_art_right.png' #'TLP2824_right400.png'
 
 gui stations:  # GUI supports 1 or 2 active stations, comment second line if you need just one, move anchors (&word) to appropriate station definition
 - *gui-left

@@ -8,7 +8,7 @@ installation station de tare.
 
 ## applications complémentaires
 
-    sudo apt-get install mousepad openssh-server system-config-printer cups gnome-system-tools
+    sudo apt-get install mousepad openssh-server system-config-printer cups nomacs gnome-system-tools
     sudo apt-get install cutecom minicom git python3-pip
 
 
@@ -43,7 +43,7 @@ OU le copier depuis clé usb :
 puis installer les librairies requises
 
     python3-tk python3-pil python3-pil.imagetk
-    pip install pyserial pycups pyttk
+    pip install pyserial pycups pyttk pyyaml pytest
 
  
 ## eventuellement éditeur de code correct
@@ -64,17 +64,6 @@ ou ajouter l'utilisateur aux groupes *dialout* et *tty* via GUI : `settings > Us
 (nécéssite un redémarrage pour entrer en vigueur... mais continuer d'abord jusqu'au touchscreen)
 
 
-## éventuellement tester la communication depuis la balance
-
-Eventuellement tester la bonne connection avec la balance, avec port : */dev/ttyS0*, baudrate : *9600* et control : *Software* :
-
-    cutecom
-
-(à exécuter avec `sudo` pour droits d'accès si avant redémarrage)
-
-ou tester la communication balance via ligne de commande :  (pour quitter minicom: `ctrl+a  x`)
-
-    minicom -b 9600 -D /dev/ttyS0 -c on -w
 
 # désactiver screensaver et powersave
 `settings > Power Manager`
@@ -122,14 +111,39 @@ creer la Queue (modifier l'adresse avec celle du résultat précédent) :
     lpadmin -p zebra-raw-1 -E -v usb://Zebra%20Technologies/ZTC%20ZD410-300dpi%20ZPL?serial=50J194404823 -m raw -o usb-unidir-default=true
 
 
-## éventuellement tester l'imprimante
+# configuration et test du programme de Tare
+
+modifier le fichier `config.yaml` pour renseigner les bonnes infos:
+
+    /opt/sublime_text/sublime_text ~/print-weight-barcodes/config.yaml
+
+- nom d'imprimante
+- port de la/les balances
+- configuration à 1 ou 2 stations sur le même écran
+
+et éventuellement:
+- image à utiliser pour le(s) bouton(s)
+
+## éventuellement tester la communication depuis la balance manuellement
+
+Eventuellement tester la bonne connection avec la balance, avec port : */dev/ttyS0*, baudrate : *9600* et control : *Software* :
+
+    cutecom
+
+(à exécuter avec `sudo` pour droits d'accès si avant redémarrage)
+
+ou tester la communication balance via ligne de commande :  (pour quitter minicom: `ctrl+a  x`)
+
+    minicom -b 9600 -D /dev/ttyS0 -c on -w
+
+## éventuellement tester l'imprimante manuellement
 
 Pour info un éditeur en ligne pour cette syntaxe d'étiquettes :
 labelary.com/viewer.html
 
 Il est facile d'imprimer directement le fichier ZPL:
 
-    lpr -P zebra-raw -o raw ~/print-weight-barcodes/test/label_ean-bravo_300dpi.zpl
+    lpr -P zebra-raw-1 -o raw ~/print-weight-barcodes/labels-samples/label_ean-bravo_300dpi.zpl
 
 
 

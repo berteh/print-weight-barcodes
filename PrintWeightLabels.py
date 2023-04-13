@@ -60,8 +60,11 @@ class PrintWeightLabels:
 		global DEBUG, config
 
 		if DEBUG : print("getting weight from scale")  
-		s = serial.Serial(port=self.scale, baudrate=9600, bytesize=serial.EIGHTBITS, timeout=2, stopbits=serial.STOPBITS_ONE, parity=serial.PARITY_NONE)
-		b = s.read(config['scale bytes'])
+		try :
+			s = serial.Serial(port=self.scale, baudrate=9600, bytesize=serial.EIGHTBITS, timeout=2, stopbits=serial.STOPBITS_ONE, parity=serial.PARITY_NONE)
+			b = s.read(config['scale bytes'])
+		except serial.SerialException as ex :
+			raise RuntimeError(f"scale configuration/connection problem : could not read weight from {self.scale}")
 		data = b.decode('ascii', 'backslashreplace')  # or use 	b.decode('cp437') to avoir overhead of replacing unknown characters
 		if DEBUG : print(f"data: {data}") 
 		if (data == "") : raise RuntimeError(f"Timeout getting weight from scale {self.scale}")
@@ -83,20 +86,22 @@ class PrintWeightLabels:
 	def send_to_printer(self, lzpl) :
 		""" Raises cups.IPPError if printer not found. 
 			Pools the provided ZPL string if printer queue exists, even if printer is not connected
+			Returns print job ID
 		"""
 		global DEBUG
 		if DEBUG : print("printing")
 
-		f = NamedTemporaryFile(mode='w+b')
+		f = NamedTemporaryFile(mode='w+b')		
 		try:
 			conn = cups.Connection()		
 			b = lzpl.encode(encoding = 'utf-16')
 			f.write(b)
 			f.seek(0)   # rewind needed to allow cups to read file
-			conn.printFile(self.printer, f.name, 'Weigh label', {} )
+			jobID = conn.printFile(self.printer, f.name, 'Weigh label', {} )
 		finally :
 			f.close()
 			conn = None
+		return jobID
 
 
 	def purge_printer_queue(self) :
@@ -113,7 +118,7 @@ class PrintWeightLabels:
 			conn = None	
 
 
-	def printer_pending_jobs(self) :
+	def printer_pending_jobs(self) : # TODO does not check printer in particular as of now, only CUPS connection > useless as-is.
 		try:
 			conn = cups.Connection()
 			open_jobs = conn.getJobs(which_jobs='not-completed', my_jobs=False) #TODO filter only self.printer
@@ -122,44 +127,6 @@ class PrintWeightLabels:
 		finally :
 			conn = None	
 		return(len(open_jobs))
-
-
-	def test(self) :
-		global DEBUG		
-		if DEBUG : print("testing all connections and label generation :")
-
-		kgs = "0,999"
-		zpl = self.get_zpl(kgs)
-		if "00999" in zpl :
-			print(f"OK ZPL : label content is  {zpl}")
-		else :
-			print(f"not OK ZPL : label content seems not to contain grams:  {zpl}")
-
-		if DEBUG : print("\ntesting scale reading :")
-		try :
-			kgs = self.get_weight_from_scale()
-		except Exception as err :
-			print(f"not OK scale : could not connect to {self.scale} or could not get weight from scale")
-		else :
-			print(f"OK scale on {self.scale}: {kgs}")
-		
-		if DEBUG : print("\ntesting printing :")
-		print_job = 0
-		try :
-			print_job = self.send_to_printer(self.zpl_template)
-		except Exception as err :
-			print(f"not OK printing : could not find printer queue {self.printer}")
-		else :
-			print(f"OK adding print job to {self.printer}")
-		for attemps in range(5):		
-			time.sleep(1.5)
-			c = self.printer_pending_jobs()
-			if (c == 0) : 
-				print(f"OK printing: check out label.... job queue is now empty")
-				return
-			else :
-				print(f". {c} job(s) pending")
-		print("not OK printing : queue is still not empty... check if printer is ON.")
 		
 
 

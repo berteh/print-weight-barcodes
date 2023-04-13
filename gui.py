@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
 """
-credit: 
-- software : berteh, for co-labor, CC-BY-SA, https://github.com/berteh/print-weight-barcodes
+author : berteh, for co-labor
+licence : CC-BY-SA 
+homepage, contributions : https://github.com/berteh/print-weight-barcodes
+credits :
 - vegetables photo by <a href="https://unsplash.com/es/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nathan Dumlao</a> on <a href="https://unsplash.com/photos/bRdRUUtbxO0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - nuts photo by <a href="https://unsplash.com/@marcospradobr?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marcos Paulo Prado</a> on <a href="https://unsplash.com/photos/GQTfzrGWzWU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 """
@@ -21,7 +23,6 @@ HCOLOR = "#85a01f"
 LOGO = 'logo.png'
 LEFT = 'left2.jpg'
 RIGHT = 'right2.jpg'
-PRINT = 'Zebra.png'  #'ZD410_tsp.png' # now configured in config.yaml
 PICSDIR = os.path.realpath(os.path.dirname(__file__))+"/pics/"
 
 
@@ -214,7 +215,7 @@ class App:
             delta_relx = 0.2
 
             #second print button (right)
-            printOR = Image.open(PICSDIR+PRINT)
+            printOR = Image.open(PICSDIR+conf[1]['picture'])
             printOR = resize_image(printOR, [width*0.3*0.7, height*0.4*0.7])
             self.printIR = ImageTk.PhotoImage(printOR)        
             printBR=tk.Button(root, textvariable=_btn, font = ftL, justify="center",
@@ -223,11 +224,11 @@ class App:
                 fg=HCOLOR, activeforeground=HCOLOR,
                 borderwidth=7, relief=tk.RAISED, pady=10)
             printBR.place(anchor="center", relx=0.5+delta_relx, rely=0.52, width=width*0.3)
-            self.pwlR = PrintWeightLabels('station1')
+            self.pwlR = PrintWeightLabels(*conf[1].values())
             printBR["command"] = self.printB_right
         
         #first print button (left)   
-        printOL = Image.open(PICSDIR+PRINT)
+        printOL = Image.open(PICSDIR+conf[0]['picture'])
         printOL = resize_image(printOL, [width*0.3*0.7, height*0.4*0.7])
         self.printIL = ImageTk.PhotoImage(printOL)        
         printBL=tk.Button(root, textvariable=_btn, font = ftL, justify="center",
@@ -236,7 +237,7 @@ class App:
             fg=HCOLOR, activeforeground=HCOLOR,
             borderwidth=7, relief=tk.RAISED, pady=10)
         printBL.place(anchor="center", relx=0.5-delta_relx, rely=0.52, width=width*0.3)
-        self.pwlL = PrintWeightLabels('station3')
+        self.pwlL = PrintWeightLabels(*conf[0].values())
         printBL["command"] = self.printB_left
 
 
