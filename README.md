@@ -6,7 +6,7 @@ The said barcode, glued to the container, can be used in loose goods shops to de
 
 ![GUI preview in dual mode (EN)](pics/preview_dualEN.png "Preview: dual mode in english")
 
-Compatible with [Odoo module: Point Of Sale - Tare](https://odoo-community.org/shop/point-of-sale-tare-5489?category=15#attr=8466)
+The (default) EAN-13 barcode is compatible with [Odoo module: Point Of Sale - Tare](https://odoo-community.org/shop/point-of-sale-tare-5489?category=15#attr=8466), but mostly all formats are easy to adapt (incl. QR code).
 
 Tested with Zebra label printers (via USB) and Soehnle (Pro) scales (via COM interface)... but plenty flexible. Multilangue interface supports EN, DE, FR, PT, LU.
 
@@ -27,7 +27,7 @@ GUI is ready for dual (above) or single (below) setup:
     sudo apt-get install cutecom cups python3-pip python3-tk python3-pil python3-pil.imagetk
     pip install pyserial pycups pyttk pyyaml pytest
 
-3. quick check configuration `pytest`
+3. quick check configuration for most probable errors (configuration, access rights): `pytest`
 4. run `cd ~/print-weight-barcodes && python3 gui.py`
 5. copy launcher to desktop and *update it's working directory* (right clic > edit launcher) to match your script location
 
@@ -37,6 +37,14 @@ Current user needs to have rights to read scale weight. add him to `dialout` and
 
     sudo gpasswd --add $USER dialout
     sudo gpasswd --add $USER tty
+
+# label editor
+
+Adapt the provided label templates to your need, eg with help of 
+
+- ZPL online editor/viewer at http://labelary.com/viewer.html
+- ZPL Syntax reference http://labelary.com/zpl.html
+- [ZPL Quick Reference](https://gist.github.com/metafloor/773bc61480d1d05a976184d45099ef56)
 
 
 # Kiosk mode

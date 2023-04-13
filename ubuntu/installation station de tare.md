@@ -42,7 +42,7 @@ OU le copier depuis clé usb :
 
 puis installer les librairies requises
 
-    python3-tk python3-pil python3-pil.imagetk
+    sudo apt-get install python3-tk python3-pil python3-pil.imagetk
     pip install pyserial pycups pyttk pyyaml pytest
 
  
@@ -123,6 +123,11 @@ modifier le fichier `config.yaml` pour renseigner les bonnes infos:
 
 et éventuellement:
 - image à utiliser pour le(s) bouton(s)
+
+Tester le bon fonctionnement du script (les tests doivent tous réussir ou passer):
+
+    cd ~/print-weight-barcodes/ & pytest
+
 
 ## éventuellement tester la communication depuis la balance manuellement
 
