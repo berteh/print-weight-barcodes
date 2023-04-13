@@ -4,16 +4,17 @@ Point-of-Sales to "weight-it-yourself" and print the Tare of (empty) containers 
 
 The said barcode, glued to the container, can be used in loose goods shops to deduce the Tare from the product weight.
 
+![GUI preview in dual mode (EN)](pics/preview_dualEN.png "Preview: dual mode in english")
+
 Compatible with [Odoo module: Point Of Sale - Tare](https://odoo-community.org/shop/point-of-sale-tare-5489?category=15#attr=8466)
 
 Tested with Zebra label printers (via USB) and Soehnle (Pro) scales (via COM interface)... but plenty flexible. Multilangue interface supports EN, DE, FR, PT, LU.
 
-Tested in Xubuntu, should work in other OS (including windows provided you install Python and CUPS) with minimal changes to config file.
+Tested in Xubuntu, should work in other OS (including windows provided you install Python and CUPS) with minimal changes to config file. Use at your own risks, we're happy so far.
 
-Ready for single or dual setup:
+GUI is ready for dual (above) or single (below) setup:
 
-![GUI preview in dual mode (EN)](pics/preview_dualEN.png "Preview: dual mode in english")
-![GUI preview in single mode (LU)](pics/preview_dualEN.png "Preview: single mode in luxembourguish")
+![GUI preview in single mode (LU)](pics/preview_singleLU.png "Preview: single mode in luxembourguish")
 
 
 
@@ -22,11 +23,15 @@ Ready for single or dual setup:
 1. download [code](https://github.com/berteh/print-weight-barcodes/archive/refs/heads/main.zip) and unzip (eg to ~/print-weight-barcodes)    
 2. edit `config.yaml` to suit your devices
 2. install dependencies:
+
     sudo apt-get install cutecom cups python3-pip python3-tk python3-pil python3-pil.imagetk
     pip install pyserial pycups pyttk pyyaml pytest
+
 3. quick check configuration `pytest`
 4. run `cd ~/print-weight-barcodes && python3 gui.py`
-5. copy launcher to desktop `cp ubuntu/'Tare Kiosk.desktop' $HOME/Desktop/` and update it's working directory (righ clic > edit launcher) to match your script location
+5. copy launcher to desktop and *update it's working directory* (right clic > edit launcher) to match your script location
+
+    cp ubuntu/'Tare Kiosk.desktop' $HOME/Desktop/
 
 Current user needs to have rights to read scale weight. add him to `dialout` and `tty` groups.
 
@@ -38,7 +43,7 @@ Current user needs to have rights to read scale weight. add him to `dialout` and
 
 Instead of running the app manually, you can keep the app running via a custom systemd service (adapted from https://superuser.com/a/1128905)
 
-Either use the provided script that will configure and start the service: 
+Either use the provided script that will configure a user-service and start it on login (in Xubuntu): 
 
     ./install_as_user_service.sh
 
@@ -77,7 +82,7 @@ If you'd like to configure a whole screen-touch Xubuntu system from scratch to r
 
 # support and contributions
 
-It's likely no support will be provided, but you can always try opening an (Issue)[https://github.com/berteh/print-weight-barcodes/issues].
+This code is brought to you for Free by [co-labor](https://co-labor.lu). It's likely no support will be provided as it's not our job, but you can always try opening an [Issue](https://github.com/berteh/print-weight-barcodes/issues).
 
-Improvements are welcome as (Pull-Requests)[https://github.com/berteh/print-weight-barcodes/pulls].
+Improvements are welcome as [Pull-Requests](https://github.com/berteh/print-weight-barcodes/pulls).
 
