@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Tare Kiosk
+Name=Start Tare Kiosk
 Comment=
 Exec=systemctl --user start TareKiosk.service
-Icon=scanner
+Icon=sync-synchronizing
 Path=$HOME
 Terminal=false
 StartupNotify=false

@@ -32,6 +32,7 @@ gui stations:  # GUI supports 1 or 2 active stations, comment second line if you
 - *gui-right
 
 
+##########################################
 # There is usually no need to make changes below this line.
 debug : False
 templates :     # label templates in ZPL format. $kgs, $grams and $cheers will be replaced. $grams will be 5 chars long (KKGGG). online editor/viewer at http://labelary.com/viewer.html
