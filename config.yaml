@@ -27,8 +27,8 @@ station3 : &gui-right
   empty print queue on launch : yes
   picture : 'Zebra_art_right.png' #'TLP2824_right400.png'
 
-gui stations:  # GUI supports 1 or 2 active stations, comment second line if you need just one, move anchors (&word) to appropriate station definition
-- *gui-left
+gui stations:  # GUI supports 1 or 2 active stations, comment one line if you need just one, move anchors (&word) to appropriate station definition
+#- *gui-left
 - *gui-right
 
 
