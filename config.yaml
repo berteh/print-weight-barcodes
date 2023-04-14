@@ -8,7 +8,7 @@
 
 station1 : &gui-left                # copy and adapt to create as many specific configurations as you'd like
   scale port : '/dev/ttyS0'         # COM device name of RS-232 scale
-  printer name : 'zebra-raw-D3'     # CUPS name of zebra (RAW or TEXT Queue) printer
+  printer name : 'zebra-raw-D2'     # CUPS name of zebra (RAW or TEXT Queue) printer
   label template : '5x2.5 TLP2824'  # MUST be one the label templates defined below and compatible with the printer above
   empty print queue on launch : yes # set to *no* if other users connect to same printer, otherwise it's recommanded to set to yes to remove legacy print jobs from queue on launch
   picture : 'Tiger_art_left.png'    # image for big print button (png or jpg, 400 px wide, in ./pics/ directory)
@@ -22,14 +22,14 @@ station2 :
 
 station3 : &gui-right
   scale port : '/dev/ttyS1'
-  printer name : 'zebra-raw-D2'
+  printer name : 'zebra-raw-D1'
   label template : '5x2.5 TLP2824'
   empty print queue on launch : yes
   picture : 'Zebra_art_right.png' #'TLP2824_right400.png'
 
 gui stations:  # GUI supports 1 or 2 active stations, comment one line if you need just one, move anchors (&word) to appropriate station definition
-#- *gui-left
-- *gui-right
+- *gui-left
+#- *gui-right
 
 
 ##########################################
@@ -73,7 +73,7 @@ cheers :      # list of *short* cheers. One may be added at random on the label
 - "Merci."
 - "Merci."
 
-default CLI station : 'station3'
+default CLI station : 'station1'
 
 
 # modify below only for other scales as Soehnle 37xx
