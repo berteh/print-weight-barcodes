@@ -11,4 +11,4 @@ StartupNotify=false
 Terminal=false
 Hidden=false
 Icon=scanner
-Path=/home/balance1/print-weight-barcodes/
+Path=script-dir/
