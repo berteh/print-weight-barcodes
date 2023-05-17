@@ -84,7 +84,16 @@ ou ajouter l'utilisateur aux groupes *dialout* et *tty* via GUI : `settings > Us
 
 OU télécharger le driver plus récent depuis https://www.eeti.com/drivers_Linux.html , et installer comme ci-dessus. typiquement:
 
-    wget https://www.eeti.com/touch_driver/Linux/20221114/eGTouch_v2.5.11703.L-x.tar.gz
+    cd & wget https://www.eeti.com/touch_driver/Linux/20221114/eGTouch_v2.5.11703.L-x.tar.gz
+    tar -xvf  eGTouch_v2.5.11703.L-x.tar.gz & cd eGTouch_v2.5.11703.L-x/
+    sudo ./setup.sh    
+
+Dans tous les cas, les premiers choix (par défauts) de configuration du driver sont les bons:
+    [Y] Yes, I agree
+    [1] RS232
+    [Enter] key to continue
+    (I) [N]
+    (I) Default [1]
 
 *Redémarrer*
 
