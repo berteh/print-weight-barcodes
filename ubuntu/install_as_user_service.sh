@@ -11,8 +11,10 @@ systemctl --user enable TareKiosk.service
 
 cp ubuntu/S*.desktop $(xdg-user-dir DESKTOP)
 
-mkdir $HOME/.config/autostart/
 while read line; do   # Replace all instances on line of script-dir with $PWD
    echo ${line//script-dir/$PWD}
-done < ubuntu/'Tare Kiosk.desktop' > $HOME/.config/autostart/TareKiosk.service
+done < ubuntu/'Tare Kiosk.desktop' > ubuntu/TareKiosk.desktop
+
+sudo desktop-file-install ubuntu/TareKiosk.desktop
+sudo update-desktop-database
 
