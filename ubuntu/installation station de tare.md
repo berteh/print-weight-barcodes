@@ -9,7 +9,7 @@ installation station de tare.
 ## applications complémentaires
 
     sudo apt-get install mousepad openssh-server system-config-printer cups nomacs gnome-system-tools
-    sudo apt-get install cutecom minicom git python3-pip
+    sudo apt-get install cutecom minicom git python3-pip onboard
 
 
 ## installation automatique des mises à jour de sécurité
