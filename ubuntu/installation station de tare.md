@@ -43,6 +43,7 @@ OU le copier depuis clé usb :
 puis installer les librairies requises
 
     sudo apt-get install python3-tk python3-pil python3-pil.imagetk
+    echo "export PATH=~/.local/bin:\$PATH" >> .bashrc
     pip install pyserial pycups pyttk pyyaml pytest
 
  
