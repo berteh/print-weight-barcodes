@@ -8,5 +8,5 @@ Restart=always
 ExecStart=/usr/bin/python3 script-dir/gui.py
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 
