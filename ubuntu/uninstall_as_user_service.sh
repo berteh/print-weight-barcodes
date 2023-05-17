@@ -7,4 +7,4 @@ rm $HOME/.config/systemd/user/TareKiosk.service
 
 cd $(xdg-user-dir DESKTOP)
 rm S*Kiosk.desktop
-rm $HOME/.config/autostart/'Tare Kiosk.desktop'
+
